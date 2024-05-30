@@ -42,7 +42,7 @@ steps:
     command: 'restore'
     projects: 'Tailspin.SpaceGame.Web/*.csproj'
     feedsToUse: 'select'
-    vstsFeed: '$(System.TeamProject)/Tailspin.SpaceGame.Web.Models'
+    vstsFeed: 'GithubPipelineDemoArtifacts/Tailspin.SpaceGame.Web.Models'
 
 - task: DotNetCoreCLI@2
   displayName: 'Restore project dependencies'
@@ -50,7 +50,7 @@ steps:
     command: 'restore'
     projects: 'Tailspin.SpaceGame.Web.Tests/*.csproj'  
     feedsToUse: 'select'
-    vstsFeed: '$(System.TeamProject)/Tailspin.SpaceGame.Web.Models'
+    vstsFeed: 'GithubPipelineDemoArtifacts/Tailspin.SpaceGame.Web.Models'
 
 - task: DotNetCoreCLI@2
   displayName: 'Build the project - $(buildConfiguration)'
