@@ -18,7 +18,7 @@ stages:
       runOnce:
         deploy:
           steps:
-          - download: 6
+          - download: '6'
             artifact: drop
           - task: AzureWebApp@1
             displayName: 'Azure App Service Deploy: website'
