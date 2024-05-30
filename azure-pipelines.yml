@@ -45,16 +45,16 @@ steps:
   inputs:
     command: 'restore'
     projects: 'Tailspin.SpaceGame.Web/*.csproj'
-    feedsToUse: 'select'
-    vstsFeed: 'GithubPipelineDemoArtifacts/Tailspin.SpaceGame.Web.Models'
+    feedsToUse: 'selectOrConfig'
+    nugetConfigPath: 'Tailspin.SpaceGame.Webs/nuget.config'
 
 - task: DotNetCoreCLI@2
   displayName: 'Restore project dependencies'
   inputs:
     command: 'restore'
     projects: 'Tailspin.SpaceGame.Web.Tests/*.csproj'  
-    feedsToUse: 'select'
-    vstsFeed: 'GithubPipelineDemoArtifacts/Tailspin.SpaceGame.Web.Models'
+    feedsToUse: 'selectOrConfig'
+    nugetConfigPath: 'Tailspin.SpaceGame.Web.Tests/nuget.config'
 
 - task: DotNetCoreCLI@2
   displayName: 'Build the project - $(buildConfiguration)'
