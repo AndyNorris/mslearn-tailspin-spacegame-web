@@ -24,6 +24,7 @@ stages:
           - task: DownloadPipelineArtifact@2
             inputs:
               buildType: 'specific'
+              project: 'GithubPipelineDemoHostedAgent'
               definition: 7
               buildVersionToDownload: 'latest'
 
