@@ -22,6 +22,8 @@ steps:
     versionSpec: '5.9.1'
 
 - task: NuGetAuthenticate@1
+  inputs:
+    nuGetServiceConnections: 
 
 - task: Npm@1
   displayName: 'Run npm install'
