@@ -18,8 +18,15 @@ stages:
       runOnce:
         deploy:
           steps:
-          - download: '6'
+          - download: none
             artifact: drop
+            
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              buildType: 'specific'
+              definition: 7
+              buildVersionToDownload: 'latest'
+
           - task: AzureWebApp@1
             displayName: 'Azure App Service Deploy: website'
             inputs:
