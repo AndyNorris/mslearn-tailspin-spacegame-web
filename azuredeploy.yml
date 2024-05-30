@@ -25,7 +25,7 @@ stages:
             inputs:
               buildType: 'specific'
               project: 'GithubPipelineDemoHostedAgent'
-              definition: 7
+              definition: 6
               buildVersionToDownload: 'latest'
 
           - task: AzureWebApp@1
