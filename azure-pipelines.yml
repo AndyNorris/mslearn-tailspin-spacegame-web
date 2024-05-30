@@ -21,8 +21,6 @@ steps:
   inputs:
     versionSpec: '5.9.1'
 
-- task: NuGetAuthenticate@1
-
 - task: Npm@1
   displayName: 'Run npm install'
   inputs:
@@ -43,12 +41,14 @@ steps:
   inputs:
     command: 'restore'
     projects: 'Tailspin.SpaceGame.Web/*.csproj'
+    nugetConfigPath: 'Tailspin.SpaceGame.Web/nuget.config'
 
 - task: DotNetCoreCLI@2
   displayName: 'Restore project dependencies'
   inputs:
     command: 'restore'
-    projects: 'Tailspin.SpaceGame.Web.Tests/*.csproj'    
+    projects: 'Tailspin.SpaceGame.Web.Tests/*.csproj'  
+    nugetConfigPath: 'Tailspin.SpaceGame.Web.Tests/nuget.config'  
 
 - task: DotNetCoreCLI@2
   displayName: 'Build the project - $(buildConfiguration)'
