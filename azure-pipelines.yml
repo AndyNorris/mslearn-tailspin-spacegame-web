@@ -2,7 +2,7 @@ trigger:
 - '*'
 
 pool:
-  vmImage: 'ubuntu-20.04'
+  name: 'MyAgentPool'
   demands:
   - npm
 
@@ -20,6 +20,11 @@ steps:
 - task: NuGetToolInstaller@0
   inputs:
     versionSpec: '5.9.1'
+
+- task: NuGetAuthenticate@1
+  inputs:
+    nuGetServiceConnections: 
+
 - task: Npm@1
   displayName: 'Run npm install'
   inputs:
@@ -35,13 +40,21 @@ steps:
   displayName: 'Write build info'
   workingDirectory: $(wwwrootDir)
 
-- task: NuGetCommand@2
+- task: DotNetCoreCLI@2
   displayName: 'Restore project dependencies'
   inputs:
     command: 'restore'
-    restoreSolution: '**/*.sln'
-    feedsToUse: 'select'
-    vstsFeed: '$(System.TeamProject)/Tailspin.SpaceGame.Web.Models'
+    projects: 'Tailspin.SpaceGame.Web/*.csproj'
+    feedsToUse: 'selectOrConfig'
+    nugetConfigPath: 'Tailspin.SpaceGame.Webs/nuget.config'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Restore project dependencies'
+  inputs:
+    command: 'restore'
+    projects: 'Tailspin.SpaceGame.Web.Tests/*.csproj'  
+    feedsToUse: 'selectOrConfig'
+    nugetConfigPath: 'Tailspin.SpaceGame.Web.Tests/nuget.config'
 
 - task: DotNetCoreCLI@2
   displayName: 'Build the project - $(buildConfiguration)'
